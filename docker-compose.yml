@@ -8,6 +8,7 @@ services:
             - NODE_RED_ENABLE_SAFE_MODE=false # setting to true starts Node-RED in safe (not running) mode
         ports:
             - "1880:1880"
+            - "502:502"
         container_name: virtual-lab
         hostname: virtuallab
         restart: unless-stopped
