@@ -2,8 +2,7 @@ version: "3.9"
 services:
     virtuallab:
         build: .
-        # image: virtual-lab
-        image: nodered/node-red
+        image: rlmariz/virtual-lab
         environment:
             - TZ=America/Sao_Paulo
             - NODE_RED_ENABLE_SAFE_MODE=false # setting to true starts Node-RED in safe (not running) mode
