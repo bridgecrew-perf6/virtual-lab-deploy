@@ -13,3 +13,22 @@ services:
         restart: unless-stopped
         volumes:
             - "./node-red-data:/data"
+
+    scadalts:
+        # https://github.com/SCADA-LTS/Scada-LTS
+        # http://127.0.0.1:8080/Scada-LTS
+        image: scadalts/scadalts:latest
+        environment:
+            - TZ=America/Sao_Paulo
+        ports:
+            - "8080:8080"
+        container_name: scadalts
+        hostname: scadalts
+        restart: unless-stopped
+        depends_on: 
+            # - database
+            - virtuallab
+        expose: ["8080", "8000"]
+        links:
+            # - database:database
+            - virtuallab:virtuallab
