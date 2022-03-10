@@ -28,7 +28,7 @@ services:
             - MYSQL_DATABASE=scadalts
         expose: ["3306"]
         volumes:
-            -   ./scadalts-data:/var/lib/mysql            
+            -   ./scadalts-data:/var/lib/mysql
 
     scadalts:
         # https://github.com/SCADA-LTS/Scada-LTS
