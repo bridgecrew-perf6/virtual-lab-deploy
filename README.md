@@ -101,7 +101,7 @@ terraform apply
 
 12. O processo leva certa de 6 minutos para ser implementado e ao final será exibido os endpoints para acesso ao supervisório, node-red e caso necessário o comando para acesso via ssh.
 
-    <img src="media/terraform-apply-1.png"/>
+    <img src="media/terraform-apply-2.png"/>
 
 13. O usuário e senha para acesso ao supervisório é ***admin/admin***.
 
