@@ -58,7 +58,7 @@ resource "aws_instance" "server" {
       "docker-compose up -d",
       "sleep 45s",
       "sudo mv all-databases.sql ./scadalts-data",
-      "docker exec -i mysql sh -c 'exec mysql -uroot -proot -f < /var/lib/mysql/all-databases.sql'",
+      "docker exec -i mysql sh -c 'exec mysql -uroot -proot -f scadalts < /var/lib/mysql/all-databases.sql'",
       "docker stop scadalts",
       "docker start scadalts",
       "docker cp ./uploads/5.png scadalts:/usr/local/tomcat/webapps/Scada-LTS/uploads/5.png"
