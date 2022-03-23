@@ -8,6 +8,14 @@
         "env": []
     },
     {
+        "id": "dd13224eac8a9289",
+        "type": "tab",
+        "label": "Test",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "fcac8d51.7bff8",
         "type": "modbus-client",
         "name": "NodeModbus",
@@ -29,8 +37,34 @@
         "unit_id": "1",
         "commandDelay": "1",
         "clientTimeout": "1000",
-        "reconnectOnTimeout": true,
+        "reconnectOnTimeout": false,
         "reconnectTimeout": "2000",
+        "parallelUnitIdsAllowed": false
+    },
+    {
+        "id": "49d3193f.f38d88",
+        "type": "modbus-client",
+        "name": "NodeRedNode",
+        "clienttype": "tcp",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "queueLogEnabled": false,
+        "tcpHost": "virtuallab",
+        "tcpPort": "502",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": "9600",
+        "serialDatabits": "8",
+        "serialStopbits": "1",
+        "serialParity": "none",
+        "serialConnectionDelay": "100",
+        "serialAsciiResponseStartDelimiter": "",
+        "unit_id": 1,
+        "commandDelay": 1,
+        "clientTimeout": 1000,
+        "reconnectOnTimeout": false,
+        "reconnectTimeout": 2000,
         "parallelUnitIdsAllowed": false
     },
     {
@@ -38,19 +72,18 @@
         "type": "tanque",
         "z": "30eabd99172917aa",
         "name": "Tanque",
-        "valveK": "0.5",
-        "valveOpen": "0",
-        "area": "1",
-        "startInputFlow": "0",
-        "startOutputFlow": "0",
-        "startLevel": "4",
-        "modbusHost": "virtuallab",
+        "valveK": "2",
+        "valveOpen": "50",
+        "area": "4",
+        "maxLevel": "12",
+        "startLevel": "6",
+        "modbusHost": "192.168.5.143",
         "modbusPort": "502",
         "modbusRegister": "12",
         "integrationInterval": "1",
         "intervalUpdate": "1000",
         "x": 500,
-        "y": 240,
+        "y": 300,
         "wires": [
             [
                 "d72a4fe3cce0ecc4",
@@ -58,6 +91,9 @@
             ],
             [
                 "e96cb405f5725aab"
+            ],
+            [
+                "d1eabf4b7cc34ec3"
             ]
         ]
     },
@@ -72,8 +108,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 440,
-        "y": 60,
+        "x": 460,
+        "y": 80,
         "wires": [
             [
                 "bcc0f9c8aa2fbc0c"
@@ -94,8 +130,8 @@
         "server": "fcac8d51.7bff8",
         "emptyMsgOnFail": false,
         "keepMsgProperties": false,
-        "x": 630,
-        "y": 60,
+        "x": 650,
+        "y": 80,
         "wires": [
             [],
             []
@@ -112,8 +148,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 440,
-        "y": 140,
+        "x": 460,
+        "y": 200,
         "wires": [
             [
                 "9aa1ff4bb98fdd7c"
@@ -134,8 +170,8 @@
         "server": "fcac8d51.7bff8",
         "emptyMsgOnFail": false,
         "keepMsgProperties": false,
-        "x": 630,
-        "y": 140,
+        "x": 650,
+        "y": 200,
         "wires": [
             [],
             []
@@ -152,8 +188,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 440,
-        "y": 100,
+        "x": 460,
+        "y": 140,
         "wires": [
             [
                 "0e1bfd37d59c32fa"
@@ -174,8 +210,8 @@
         "server": "fcac8d51.7bff8",
         "emptyMsgOnFail": false,
         "keepMsgProperties": false,
-        "x": 640,
-        "y": 100,
+        "x": 660,
+        "y": 140,
         "wires": [
             [],
             []
@@ -186,13 +222,13 @@
         "type": "PID control",
         "z": "30eabd99172917aa",
         "name": "",
-        "target": "9.333",
-        "kp": "0.735",
-        "ki": "0.255",
-        "kd": "0.628",
+        "target": "12",
+        "kp": "3.93",
+        "ki": "2",
+        "kd": "0.5",
         "intervalTime": "1",
         "x": 110,
-        "y": 240,
+        "y": 300,
         "wires": [
             [
                 "a20a59ad0bba46c9"
@@ -208,11 +244,11 @@
         "inputMax": "20",
         "outputMin": 0,
         "outputMax": "8",
+        "inputValueStart": "9",
         "x": 320,
-        "y": 240,
+        "y": 300,
         "wires": [
             [
-                "d1eabf4b7cc34ec3",
                 "7b4460f816a46442"
             ]
         ]
@@ -227,7 +263,7 @@
         "outputMin": "4",
         "outputMax": "20",
         "x": 330,
-        "y": 400,
+        "y": 460,
         "wires": [
             [
                 "af9784e785cce196"
@@ -235,7 +271,32 @@
         ]
     },
     {
-        "id": "d36a0ab13f7b9572",
+        "id": "9fd23f328890f269",
+        "type": "inject",
+        "z": "30eabd99172917aa",
+        "name": "Degrau 10mA",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "0.5",
+        "topic": "",
+        "payload": "10",
+        "payloadType": "num",
+        "x": 130,
+        "y": 220,
+        "wires": [
+            [
+                "a20a59ad0bba46c9"
+            ]
+        ]
+    },
+    {
+        "id": "c7284ab24cba9ba9",
         "type": "modbus-server",
         "z": "30eabd99172917aa",
         "name": "Modbus Server",
@@ -250,7 +311,7 @@
         "discreteBufferSize": 10000,
         "showErrors": false,
         "x": 140,
-        "y": 120,
+        "y": 100,
         "wires": [
             [],
             [],
@@ -260,13 +321,108 @@
         ]
     },
     {
-        "id": "5415b20522706239",
+        "id": "69408d61d63f062c",
         "type": "comment",
         "z": "30eabd99172917aa",
-        "name": "Simulação de controle de nível de tanque linearizado em 4m.",
-        "info": "Simulação de controle de nível de tanque linearizado em 4m.",
-        "x": 400,
+        "name": "Simulação de controle de nível de tanque com ponto de contrle em  6m.",
+        "info": "",
+        "x": 410,
         "y": 20,
         "wires": []
+    },
+    {
+        "id": "9e3cd65f9ab46e5e",
+        "type": "modbus-read",
+        "z": "dd13224eac8a9289",
+        "name": "",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "unitid": "",
+        "dataType": "HoldingRegister",
+        "adr": "12",
+        "quantity": "2",
+        "rate": "2",
+        "rateUnit": "s",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "49d3193f.f38d88",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 190,
+        "y": 60,
+        "wires": [
+            [
+                "80f4cafac99e0c02"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "80f4cafac99e0c02",
+        "type": "debug",
+        "z": "dd13224eac8a9289",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 430,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "d23ce7562e9b84aa",
+        "type": "modbus-write",
+        "z": "dd13224eac8a9289",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "unitid": "",
+        "dataType": "HoldingRegister",
+        "adr": "12",
+        "quantity": "1",
+        "server": "fcac8d51.7bff8",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "x": 440,
+        "y": 140,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "43e06968b542633a",
+        "type": "inject",
+        "z": "dd13224eac8a9289",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "50",
+        "payloadType": "num",
+        "x": 170,
+        "y": 140,
+        "wires": [
+            [
+                "d23ce7562e9b84aa"
+            ]
+        ]
     }
 ]
