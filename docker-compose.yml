@@ -13,7 +13,8 @@ services:
         restart: unless-stopped
         volumes:
             - "./node-red-data:/data"
-
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
     database:
         container_name: mysql
         hostname: mysql
