@@ -77,7 +77,7 @@
         "area": "4",
         "maxLevel": "12",
         "startLevel": "6",
-        "modbusHost": "192.168.5.143",
+        "modbusHost": "virtuallab",
         "modbusPort": "502",
         "modbusRegister": "12",
         "integrationInterval": "1",
