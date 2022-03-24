@@ -59,7 +59,7 @@ resource "aws_instance" "server" {
       "docker stop scadalts",
       "sleep 30s",
       "docker start scadalts",
-      "sleep 45s",
+      "sleep 30s",
       "curl -sSf http://127.0.0.1:8080/Scada-LTS > /dev/null",      
       "sudo mv *.sql ./scadalts-data",
       "docker exec -it mysql sh -c 'exec mysql -uroot -proot -f scadalts < /var/lib/mysql/scadalts_table_dataSources.sql'",
@@ -67,7 +67,9 @@ resource "aws_instance" "server" {
       "docker exec -it mysql sh -c 'exec mysql -uroot -proot -f scadalts < /var/lib/mysql/scadalts_table_watchLists.sql'",
       "docker exec -it mysql sh -c 'exec mysql -uroot -proot -f scadalts < /var/lib/mysql/scadalts_table_watchListPoints.sql'",
       "docker exec -it mysql sh -c 'exec mysql -uroot -proot -f scadalts < /var/lib/mysql/scadalts_table_mangoViews.sql'",      
-      "docker cp ./uploads/5.png scadalts:/usr/local/tomcat/webapps/Scada-LTS/uploads/5.png"
+      "docker cp ./uploads/5.png scadalts:/usr/local/tomcat/webapps/Scada-LTS/uploads/5.png",
+      "docker stop scadalts",
+      "docker start scadalts"
     ]
   }
   connection {
