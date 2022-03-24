@@ -60,7 +60,7 @@ resource "aws_instance" "server" {
       "sleep 30s",
       "docker start scadalts",
       "sleep 45s",
-      "curl -sSf http://scadalts:8080/Scada-LTS > /dev/null",      
+      "curl -sSf http://127.0.0.1:8080/Scada-LTS > /dev/null",      
       "sudo mv *.sql ./scadalts-data",
       "docker exec -it mysql sh -c 'exec mysql -uroot -proot -f scadalts < /var/lib/mysql/scadalts_table_dataSources.sql'",
       "docker exec -it mysql sh -c 'exec mysql -uroot -proot -f scadalts < /var/lib/mysql/scadalts_table_dataPoints.sql'",
