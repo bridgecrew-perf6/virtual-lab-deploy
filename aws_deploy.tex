@@ -1,0 +1,190 @@
+\textbf{Implantação em Amazon Web Services (AWS) utilizado recurso EC2
+de planta virtual utilizando node-red e supervisório utilizando
+Scada-LTS.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Pré-requisitos
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \item
+    Ter conta no Amazon Web Services (AWS): \url{https://aws.amazon.com}
+  \item
+    Conhecimento básico em informática, git e execução de comandos
+    shell.
+  \end{enumerate}
+\item
+  Clonar o repositório no GitHub:
+  \url{https://github.com/rlmariz/virtual-lab-deploy.git}
+\item
+  Após clonar o repositório a pasta de trabalho será
+  \textbf{``virtual-lab-deploy\textbackslash aws''}, todos os arquivos
+  salvos e comandos executados devem ser nessa pasta.
+\item
+  Criar conta de acesso para ser utilizado o terraform no AWS
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Acesse o console da AWS e faça o login com sua conta e pesquise pelo
+    produto IAM (Identity and Access Management).
+  \end{enumerate}
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \setcounter{enumii}{1}
+  \tightlist
+  \item
+    Iremos criar um usuário para que o terraform possa interagir com a
+    AWS, clique em USERS e em seguida em ADD USER.
+  \end{enumerate}
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \setcounter{enumii}{2}
+  \tightlist
+  \item
+    Definir detalhes do usuário.
+  \end{enumerate}
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \setcounter{enumii}{3}
+  \tightlist
+  \item
+    Adicione a política AmazonEC2FullAccess ao usuário, o que dará
+    permissão total ao usuário apenas a recursos da EC2, e clique em
+    Next.
+  \end{enumerate}
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \setcounter{enumii}{4}
+  \tightlist
+  \item
+    Tags são utilizadas para adicionar informações relevantes ao
+    usuario, clique em Next.
+  \end{enumerate}
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \setcounter{enumii}{5}
+  \tightlist
+  \item
+    Verifique os dados e clique em Create user.
+  \end{enumerate}
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \setcounter{enumii}{6}
+  \tightlist
+  \item
+    Clique em show e copie o Access key ID e Secret access key
+  \end{enumerate}
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \setcounter{enumii}{7}
+  \tightlist
+  \item
+    O usuário criado e chave de acesso não devem ser compartilhados, uma
+    vez que quem tiver acesso a estes dados terá controle sobre os
+    recursos adicionados como política.
+  \end{enumerate}
+\item
+  Editar arquivo \textbf{\emph{aws\_credentials.txt}} e adicionar a
+  chave de acesso e a chave secreta substituindo os valores
+  \textbf{\textless access\_key\textgreater{}} e
+  \textbf{\textless secret\_access\_key\textgreater{}}.
+\item
+  Acessar o site e gerar par de chaves rsa que será utilizado para
+  conexão ssh.
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \item
+    Acesso o website
+    \href{https://www.wpoven.com/tools/create-ssh-key}{https://www.wpoven.com/tools/create-ssh-key\#}
+  \item
+    Configure o type como rsa, length 2048, password deixe em branco e
+    clique em create key.
+  \end{enumerate}
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \setcounter{enumii}{2}
+  \item
+    Fazer download do \textbf{\emph{Private Key}} e salvar arquivo com
+    nome \textbf{\emph{aws.key}}.
+  \item
+    Fazer download do \textbf{\emph{Public Key}} e salvar arquivo com
+    nome \textbf{\emph{aws.pub.key}}.
+  \end{enumerate}
+\item
+  Instalar o Terraform
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \item
+    Acesse o site \url{https://www.terraform.io/downloads}.
+  \item
+    Siga as instruções de acordo o sistema operacional que está
+    utilizando.
+  \item
+    Ao fazer o download do executável de preferência coloque na pasta de
+    trabalho para facilitar sua utilização.
+  \item
+    Pode ser feito o teste para verificar se está tudo ok executando no
+    prompt de comandos:
+  \item
+    Vai exibir a versão instalada e a plataforma:
+  \end{enumerate}
+\item
+  Caso seja necessário pode se editar o arquivo variables.tf e fazer os
+  ajustes necessários.
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{8}
+\tightlist
+\item
+  Executar o comando para instalar os requisitos do terraform.
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{9}
+\tightlist
+\item
+  O próximo passo é criar infraestrutura e subir aplicação, vamos
+  executar o comando:
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{10}
+\tightlist
+\item
+  Vai ser exibido o plano de trabalho e estando tudo ok basta digitar
+  ``yes'' e dar enter.
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{11}
+\item
+  O processo leva certa de 6 minutos para ser implementado e ao final
+  será exibido os endpoints para acesso ao supervisório, node-red e caso
+  necessário o comando para acesso via ssh.
+\item
+  O usuário e senha para acesso ao supervisório é
+  \textbf{\emph{admin/admin}}.
+\item
+  É muito importante desalocar os recursos após finalizar sua utilização
+  para não ter custos extras, para fazer isso basta executar o comando
+  abaixo e confirmar com yes, ao final os recursos serão desalocado.
+\end{enumerate}
